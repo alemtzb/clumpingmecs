@@ -339,7 +339,7 @@ generateRainMtrx = function(alfa,cc){
     rainMtrx=rbind(rainMtrx[10:2,],rainMtrx)
 }
 
-runCTest=function(dtVeros,paramVeros,model='BBsrestREsoloalfas'){
+runCTest=function(dtVeros,paramVeros,model='ParameterizationSecondPhase'){
 	obj = MakeADFun(dtVeros, paramVeros, DLL=model,random="ranef") 
 	obj$hessian = TRUE #????
 	opt = nlminb(start = obj$par, obj = obj$fn, gr = obj$gr,control=list(iter.max=10000,eval.max=10000))
@@ -347,7 +347,7 @@ runCTest=function(dtVeros,paramVeros,model='BBsrestREsoloalfas'){
 
 }
 
-runCTestSampled=function(dtVeros,model='BBsrestREsoloalfas',points=10,paramNum=3,interdepth=dtVals$interdepth){
+runCTestSampled=function(dtVeros,model='ParameterizationSecondPhase',points=10,paramNum=3,interdepth=dtVals$interdepth){
     maxOpt=list() # Here we'll save the best optimization result found
     yrNum=ncol(dtVeros$yearmat)
     spNum=ncol(dtVeros$tx)
@@ -445,13 +445,13 @@ paramVeros=list(DD=1,theta=1,sigma=0,BB2=rep(1,dim(dtVals$yearmat)[2]),BB3=rep(1
 	return(optN)
 }
 
-#read datta
+#read data
 dtSp=read.csv("BultenintMegasinDalserTripurMuhrigFloped3.csv")#specify the csv file for one of the focal species
 #clean data
-dtSp=cleanDt(dtSp)#lagNum = 0 si no voy a usar datos de años anteriores
+dtSp=cleanDt(dtSp)
 #eliminate zeros from data (estimate of a zero will always be a zero)
 dtSp=cleanzero(dtSp) 
-dtVals=setupVals(dtSp,disp=disp,BBinp=BBinp,"Bulten")#the third parameter of this function must be the first three letters of the generic name and the first thre letters of the specific epithet of the species. For example Micrhochlo kunthii would be "Mickun". This is to associate the dispersal parameters calculated in the first phase with the parameters being esttimated in this phase for each species 
+dtVals=setupVals(dtSp,disp=disp,BBinp=BBinp,"Bulten") #the third parameter of this function must be the first three letters of the generic name and the first thre letters of the specific epithet of the species. For example Micrhochlo kunthii would be "Mickun". This is to associate the dispersal parameters calculated in the first phase with the parameters being esttimated in this phase for each species 
 
 #run model
 runBasic(dtSp,dtVals,points=500)->resul
