@@ -1,10 +1,9 @@
 #Alejandra Martínez Blancas & Ian Xul 11/04/21 alemtzb@ciencias.unam.mx
+#rcode for phase 1 parameter estimation
+
 require(TMB)
 require(lhs)
 require(deldir)
-
-setwd("/home/invitado/Escritorio/Ale/capitulo2/Poisson")
-
 cleanDt=function(dtSp){
     #Remove these combinations of site/year:
     # Agua blanca F (3) - 2001,2,3,4,5
@@ -282,7 +281,7 @@ pointToCoord = function(i,inv=F){
     }
 }
 
-runCTest=function(dtVeros,paramVeros,model='IXexp3poissinint',ranEf=NULL){
+runCTest=function(dtVeros,paramVeros,model='Phase1ModelPresenceAbsence',ranEf=NULL){
 	obj = MakeADFun(dtVeros, paramVeros, DLL=model, random=ranEf)
 	obj$hessian = TRUE #????
 	opt = nlminb(start = obj$par, obj = obj$fn, gr = obj$gr,control=list(iter.max=1000,eval.max=1000))
@@ -290,7 +289,7 @@ runCTest=function(dtVeros,paramVeros,model='IXexp3poissinint',ranEf=NULL){
 
 }
 
-runCTestSampled=function(dtVeros,model='IXexp3poissinint',points=10,paramNum=3,ranEf=NULL){
+runCTestSampled=function(dtVeros,model='Phase1ModelPresenceAbsence',points=10,paramNum=3,ranEf=NULL){
 	maxOpt=list() # Here we'll save the best optimization result found
 	yrNum=ncol(dtVeros$yearmat)
 	spNum=ncol(dtVeros$tx)
@@ -343,8 +342,8 @@ runCTestSampled=function(dtVeros,model='IXexp3poissinint',points=10,paramNum=3,r
 runBasic=function(dtSp,dtVals,points=100){
 	dtVeros=list(t1=dtSp$t1,t2=dtSp$t2,x=dtSp$x,y=dtSp$y,sq=dtVals$sq,yearmat=dtVals$yearmat,ZZ=dtVals$ZZ)
 	paramVeros=list(BB=rep(1,dim(dtVals$yearmat)[2]),DD=1,alfa=1,cc=1)
-	compile("/home/invitado/Escritorio/Ale/capitulo2/Poisson/IXexp3poissinint.cpp")
-	dyn.load(dynlib("IXexp3poissinint"))
+	compile("clumpingmecs/phase 1/Phase1ModelPresenceAbsence.cpp")
+	dyn.load(dynlib("Phase1ModelPresenceAbsence"))
 	optN=runCTestSampled(dtVeros,points=points)
 	return(optN)
 }
