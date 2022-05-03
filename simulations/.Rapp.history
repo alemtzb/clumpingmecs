@@ -1,0 +1,1156 @@
+pval(obs,null2)
+plot(obs-colMeans(null2))
+ktres=kmeans(ff,centers=3,iter.max=1000)
+ktres=kmeans(ff,centers=4,iter.max=1000)
+ktres
+plot(obs-colMeans(null2))
+ord=plotsig(null2)
+lines(ord[9500,]-colMeans(null2),col="red")
+plot(obs-colMeans(null2))
+lines(ord[9500,]-colMeans(null2),col="red")
+library(natto)#
+library(SimDesign)#
+#
+res=read.csv("~/Desktop/EN/Hellinger/hellingerfunnom.csv")#
+res2=res[,-1]#
+rownames(res2)=res[,1]#
+colnames(res2)=res[,1]#
+hell=as.dist(res2)#
+polarhell=polarord(hell)#
+#
+fobs=function(dat,cent){#
+    res=vector(length=cent)#
+    for(i in 1:cent){#
+        res[i]=-log(kmeans(dat,centers=i,iter.max=10000000,nstart=100)$tot.withinss)#
+    }#
+    return(res)#
+}#
+fnull=function(dat,iter,cent=8){#
+    nulls=matrix(nrow=iter,ncol=cent)#
+    resul=vector(length=dim(dat)[1])#
+    for(i in 1:iter){#
+        nulldat=cbind(runif(length(dat[,1]),min(dat[,1]),max(dat[,1])),runif(length(dat[,2]),min(dat[,2]),max(dat[,2])))#
+        nulls[i,]=fobs(nulldat,cent)#
+    }#
+    resul=nulls#
+    return(resul)#
+}#
+#
+fnull2=function(dat,iter,cent=8){#
+    nulls=matrix(nrow=iter,ncol=cent)#
+    resul=vector(length=dim(dat)[1])#
+    for(i in 1:iter){#
+        nulldat=rmvnorm(dim(dat)[1],mean=c(0.18650585,0.45142189),sigma=matrix(c(0.04567532,0.01237593,0.01237593,0.03616886),ncol=2))#
+        nulls[i,]=fobs(nulldat,cent)#
+    }#
+    resul=nulls#
+    return(resul)#
+}
+bb=polarhell$points[,1]#
+cc=bb-min(bb)#
+cc=cc/(max(cc))#
+dd=polarhell$points[,2]#
+ee=dd-min(dd)#
+ee=ee/(max(ee))#
+ff=cbind(cc,ee)#
+obs=fobs(ff,8)#
+null2si=fnull2(ff,10000,8)#
+plot(obs-colMeans(null2si))
+pval(obs,null2si)
+ord=plotsig(null2si)
+lines(ord[9500,]-colMeans(null2si),col="red")
+res=read.csv("~/Desktop/EN/Hellinger/hellingersinfacnom2.csv")#
+res2=res[,-1]#
+rownames(res2)=res[,1]#
+colnames(res2)=res[,1]#
+hell=as.dist(res2)#
+polarhell=polarord(hell)
+bb=polarhell$points[,1]#
+cc=bb-min(bb)#
+cc=cc/(max(cc))#
+dd=polarhell$points[,2]#
+ee=dd-min(dd)#
+ee=ee/(max(ee))#
+ff=cbind(cc,ee)
+null2si=fnull2(ff,10000,8)#
+plot(obs-colMeans(null2si))
+null2si=fnull2(ff,1000,8)
+pval(obs,null2si)
+polarhell=readRDS("~/Desktop/EN/Hellinger/ordenacionAle")
+bb=polarhell$points[,1]#
+cc=bb-min(bb)#
+cc=cc/(max(cc))#
+dd=polarhell$points[,2]#
+ee=dd-min(dd)#
+ee=ee/(max(ee))#
+ff=cbind(cc,ee)#
+obs=fobs(ff,8)#
+null2=fnull2(ff,10000,8)
+null2si=fnull2(ff,1000,8)#
+plot(obs-colMeans(null2si))
+obs=fobs(ff,8)#
+null2si=fnull2(ff,1000,8)#
+plot(obs-colMeans(null2si))
+pval(obs,null2si)
+res=read.csv("~/Desktop/EN/Hellinger/hellingerfunnom.csv")#
+res2=res[,-1]#
+rownames(res2)=res[,1]#
+colnames(res2)=res[,1]#
+hell=as.dist(res2)#
+polarhell=polarord(hell)
+bb=polarhell$points[,1]#
+cc=bb-min(bb)#
+cc=cc/(max(cc))#
+dd=polarhell$points[,2]#
+ee=dd-min(dd)#
+ee=ee/(max(ee))#
+ff=cbind(cc,ee)#
+obs=fobs(ff,8)#
+null2si=fnull2(ff,1000,8)#
+plot(obs-colMeans(null2si))
+fnull2=function(dat,iter,cent=8){#
+    nulls=matrix(nrow=iter,ncol=cent)#
+    resul=vector(length=dim(dat)[1])#
+    for(i in 1:iter){#
+        nulldat=rmvnorm(dim(dat)[1],mean=c(0.094111409,0.377846149),sigma=matrix(c(0.05275338,0.02272396,0.02272396,0.05275338),ncol=2))#
+        nulls[i,]=fobs(nulldat,cent)#
+    }#
+    resul=nulls#
+    return(resul)#
+}
+obsfac=fobs(ff,8)#
+nullfac=fnull2(ff,10000)#
+plot(obsfac-colMeans(null2fac))
+obsfac=fobs(ff,8)#
+nullfac=fnull2(ff,1000)#
+plot(obsfac-colMeans(null2fac))
+plot(obsfac-colMeans(nullfac))
+pval(obs,nullfac)
+fnull2=function(dat,iter,cent=8){#
+    nulls=matrix(nrow=iter,ncol=cent)#
+    resul=vector(length=dim(dat)[1])#
+    for(i in 1:iter){#
+        nulldat=rmvnorm(dim(dat)[1],mean=c(0.094111409,0.377846149),sigma=matrix(c(0.05275338,0.02272396,0.02272396,0.05275338),ncol=2))#
+        nulls[i,]=fobs(nulldat,cent)#
+    }#
+    resul=nulls#
+    return(resul)#
+}
+bb=polarhell$points[,1]#
+cc=bb-min(bb)#
+cc=cc/(max(cc))#
+dd=polarhell$points[,2]#
+ee=dd-min(dd)#
+ee=ee/(max(ee))#
+ff=cbind(cc,ee)#
+obs=fobs(ff,8)
+obsfac=fobs(ff,8)
+res=read.csv("~/Desktop/EN/Hellinger/hellingerfunnom.csv")#
+res2=res[,-1]#
+rownames(res2)=res[,1]#
+colnames(res2)=res[,1]#
+hell=as.dist(res2)#
+polarhell=polarord(hell)
+bb=polarhell$points[,1]#
+cc=bb-min(bb)#
+cc=cc/(max(cc))#
+dd=polarhell$points[,2]#
+ee=dd-min(dd)#
+ee=ee/(max(ee))#
+ff=cbind(cc,ee)#
+obs=fobs(ff,8)
+fnull2=function(dat,iter,cent=8){#
+    nulls=matrix(nrow=iter,ncol=cent)#
+    resul=vector(length=dim(dat)[1])#
+    for(i in 1:iter){#
+        nulldat=rmvnorm(dim(dat)[1],mean=c(0.094111409,0.377846149),sigma=matrix(c(0.05275338,0.02272396,0.02272396,0.05275338),ncol=2))#
+        nulls[i,]=fobs(nulldat,cent)#
+    }#
+    resul=nulls#
+    return(resul)#
+}
+nullfac=fnull2(ff,1000)
+obsfac=fobs(ff,8)
+nullfac=fnull2(ff,1000)
+pval(obsfac,nullfac)
+fnull2=function(dat,iter,cent=8){#
+    nulls=matrix(nrow=iter,ncol=cent)#
+    resul=vector(length=dim(dat)[1])#
+    for(i in 1:iter){#
+        nulldat=rmvnorm(dim(dat)[1],mean=c(0.08113314,0.34535243),sigma=matrix(c(0.04304891,0,0,0.04283232),ncol=2))#
+        nulls[i,]=fobs(nulldat,cent)#
+    }#
+    resul=nulls#
+    return(resul)#
+}
+null2=fnull2(ff,1000,8)
+pval(obs,null2)
+res=read.csv("~/Desktop/EN/Hellinger/hellingersinfacnom2.csv")#
+res2=res[,-1]#
+rownames(res2)=res[,1]#
+colnames(res2)=res[,1]#
+hell=as.dist(res2)#
+polarhell=polarord(hell)#
+#
+fobs=function(dat,cent){#
+    res=vector(length=cent)#
+    for(i in 1:cent){#
+        res[i]=-log(kmeans(dat,centers=i,iter.max=10000000,nstart=100)$tot.withinss)#
+    }#
+    return(res)#
+}#
+fnull=function(dat,iter,cent=8){#
+    nulls=matrix(nrow=iter,ncol=cent)#
+    resul=vector(length=dim(dat)[1])#
+    for(i in 1:iter){#
+        nulldat=cbind(runif(length(dat[,1]),min(dat[,1]),max(dat[,1])),runif(length(dat[,2]),min(dat[,2]),max(dat[,2])))#
+        nulls[i,]=fobs(nulldat,cent)#
+    }#
+    resul=nulls#
+    return(resul)#
+}#
+#
+fnull2=function(dat,iter,cent=8){#
+    nulls=matrix(nrow=iter,ncol=cent)#
+    resul=vector(length=dim(dat)[1])#
+    for(i in 1:iter){#
+        nulldat=rmvnorm(dim(dat)[1],mean=c(0.094111409,0.377846149),sigma=matrix(c(0.05275338,0.02272396,0.02272396,0.05275338),ncol=2))#
+        nulls[i,]=fobs(nulldat,cent)#
+    }#
+    resul=nulls#
+    return(resul)#
+}
+dat=read.csv("~/Desktop/EN/Hellinger/datosfunnom.csv")
+dat=dat[,-1]
+prof=seq(3,28,.1)
+pm=function(x) sum(prof*x)
+apply(dat,2,pm)->abumeans
+abumeans
+dat=read.csv("~/Desktop/EN/Hellinger/datosnom.csv")
+dat=dat[,-1]
+prof=seq(3,28,.1)
+pm=function(x) sum(prof*x)
+apply(dat,2,pm)->abumeans
+abumeans
+dat=read.csv("~/Desktop/EN/Hellinger/datosfunnom.csv")
+dat=dat[,-1]
+prof=seq(3,28,.1)
+pm=function(x) sum(prof*x)
+apply(dat,2,pm)->abumeans
+abumeans
+dat=read.csv("~/Desktop/EN/Hellinger/datosnom.csv")
+dat=dat[,-1]
+prof=seq(3,28,.1)
+pm=function(x) sum(prof*x)
+apply(dat,2,pm)->abumeans
+abumeans
+dat=read.csv("~/Desktop/EN/Hellinger/datosfunnom.csv")
+dat=dat[,-1]
+prof=seq(3,28,.1)
+pm=function(x) sum(prof*x)
+apply(dat,2,pm)->abumeans
+abumeans
+library(SimDesign)
+fobs=function(dat,cent){#
+    res=vector(length=cent)#
+    for(i in 1:cent){#
+        res[i]=-log(kmeans(dat,centers=i,iter.max=10000000,nstart=100)$tot.withinss)#
+    }#
+    return(res)#
+}
+fnull=function(dat,iter,cent=8){#
+    nulls=matrix(nrow=iter,ncol=cent)#
+    resul=vector(length=dim(dat)[1])#
+    for(i in 1:iter){#
+        nulldat=cbind(runif(length(dat[,1]),min(dat[,1]),max(dat[,1])),runif(length(dat[,2]),min(dat[,2]),max(dat[,2])))#
+        nulls[i,]=fobs(nulldat,cent)#
+    }#
+    resul=nulls#
+    return(resul)#
+}
+fnull2=function(dat,iter,cent=8){#
+    nulls=matrix(nrow=iter,ncol=cent)#
+    resul=vector(length=dim(dat)[1])#
+    for(i in 1:iter){#
+        nulldat=rmvnorm(dim(dat)[1],mean=c(0.08113314,0.34535243),sigma=matrix(c(0.04304891,0,0,0.04283232),ncol=2))#
+        nulls[i,]=fobs(nulldat,cent)#
+    }#
+    resul=nulls#
+    return(resul)#
+}
+polarhell=readRDS("~/Desktop/EN/Hellinger/ordenacionAle")
+bb=polarhell$points[,1]
+cc=bb-min(bb)
+cc=cc/(max(cc))
+dd=polarhell$points[,2]
+ee=dd-min(dd)
+ee=ee/(max(ee))
+ff=cbind(cc,ee)
+obs=fobs(ff,8)
+null2=fnull2(ff,10000,8)
+plot(obs-colMeans(null2))
+pval=function(obs,null){#
+    resul=1:length(obs)#
+    for(i in 1:length(obs)){#
+        resul[i]=length(which(null[,i]>obs[i]))/length(null[,i])#
+    }#
+    resul#
+}
+pval(obs,null2)
+plotsig=function(null2){#
+    resul=matrix(nrow=nrow(null2),ncol=ncol(null2))#
+    for(i in 1:ncol(null2)){#
+        resul[,i]=sort(null2[,i])#
+    }#
+    return(resul)#
+}#
+#
+ord=plotsig(null2)#
+#
+lines(ord[9500,]-colMeans(null2),col="red")
+plot(obs-colMeans(null2))
+lines(ord[9500,]-colMeans(null2),col="red")
+plot(obs-colMeans(null2))
+lines(ord[9500,]-colMeans(null2),col="red")
+library(natto)#
+library(SimDesign)#
+#
+res=read.csv("~/Desktop/EN/Hellinger/hellingersinfacnom2.csv")#
+res2=res[,-1]#
+rownames(res2)=res[,1]#
+colnames(res2)=res[,1]#
+hell=as.dist(res2)#
+polarhell=polarord(hell)#
+#
+fobs=function(dat,cent){#
+    res=vector(length=cent)#
+    for(i in 1:cent){#
+        res[i]=-log(kmeans(dat,centers=i,iter.max=10000000,nstart=100)$tot.withinss)#
+    }#
+    return(res)#
+}#
+fnull=function(dat,iter,cent=8){#
+    nulls=matrix(nrow=iter,ncol=cent)#
+    resul=vector(length=dim(dat)[1])#
+    for(i in 1:iter){#
+        nulldat=cbind(runif(length(dat[,1]),min(dat[,1]),max(dat[,1])),runif(length(dat[,2]),min(dat[,2]),max(dat[,2])))#
+        nulls[i,]=fobs(nulldat,cent)#
+    }#
+    resul=nulls#
+    return(resul)#
+}
+bb=polarhell$points[,1]#
+cc=bb-min(bb)#
+cc=cc/(max(cc))#
+dd=polarhell$points[,2]#
+ee=dd-min(dd)#
+ee=ee/(max(ee))#
+ff=cbind(cc,ee)
+library(bbmle)
+library(mvtnorm)
+colMeans(ff) #use these as starting values for mu
+params=mle2(minuslogl=normbi,start=list(mu1=0.3956417,mu2=0.1637749,s1=0.5,s2=0.5,cova=0),data=list(x=ff))
+normbi=function(x,mu1,mu2,s1,s2,cova){#
+    s1=exp(s1)#
+    s2=exp(s2)#
+    veros=-sum(dmvnorm(x, mean = c(mu1, mu2), sigma = matrix(c(s1,cova,cova,s2), ncol=2),log=TRUE))#
+    return(veros)#
+}
+params=mle2(minuslogl=normbi,start=list(mu1=0.3956417,mu2=0.1637749,s1=0.5,s2=0.5,cova=0),data=list(x=ff))
+params
+exp(-2.85128256)
+exp(-3.17438395)
+fnull2=function(dat,iter,cent=8){#
+    nulls=matrix(nrow=iter,ncol=cent)#
+    resul=vector(length=dim(dat)[1])#
+    for(i in 1:iter){#
+        nulldat=rmvnorm(dim(dat)[1],mean=c(0.39564188,0.16377492),sigma=matrix(c(0.05777018,0.01234031,0.01234031,0.04181986),ncol=2))#
+        nulls[i,]=fobs(nulldat,cent)#
+    }#
+    resul=nulls#
+    return(resul)#
+}
+obsfac=fobs(ff,8)
+nullfac=fnull2(ff,1000)
+plot(obsfac-colMeans(nullfac))
+nullfac=fnull2(ff,10000)
+plot(obsfac-colMeans(nullfac))
+pval(obsfac,null2fac)
+pval(obsfac,nullfac)
+ord=plotsig(nullfac)
+lines(ord[9500,]-colMeans(nullfac),col="red")
+library(natto)#
+library(SimDesign)#
+#
+res=read.csv("~/Desktop/EN/Hellinger/hellingerfunnom.csv")#
+res2=res[,-1]#
+rownames(res2)=res[,1]#
+colnames(res2)=res[,1]#
+hell=as.dist(res2)#
+polarhell=polarord(hell)#
+#
+fobs=function(dat,cent){#
+    res=vector(length=cent)#
+    for(i in 1:cent){#
+        res[i]=-log(kmeans(dat,centers=i,iter.max=10000000,nstart=100)$tot.withinss)#
+    }#
+    return(res)#
+}#
+fnull=function(dat,iter,cent=8){#
+    nulls=matrix(nrow=iter,ncol=cent)#
+    resul=vector(length=dim(dat)[1])#
+    for(i in 1:iter){#
+        nulldat=cbind(runif(length(dat[,1]),min(dat[,1]),max(dat[,1])),runif(length(dat[,2]),min(dat[,2]),max(dat[,2])))#
+        nulls[i,]=fobs(nulldat,cent)#
+    }#
+    resul=nulls#
+    return(resul)#
+}#
+#
+fnull2=function(dat,iter,cent=8){#
+    nulls=matrix(nrow=iter,ncol=cent)#
+    resul=vector(length=dim(dat)[1])#
+    for(i in 1:iter){#
+        nulldat=rmvnorm(dim(dat)[1],mean=c(0.18650585,0.45142189),sigma=matrix(c(0.04567532,0.01237593,0.01237593,0.03616886),ncol=2))#
+        nulls[i,]=fobs(nulldat,cent)#
+    }#
+    resul=nulls#
+    return(resul)#
+}#
+#
+bb=polarhell$points[,1]#
+cc=bb-min(bb)#
+cc=cc/(max(cc))#
+dd=polarhell$points[,2]#
+ee=dd-min(dd)#
+ee=ee/(max(ee))#
+ff=cbind(cc,ee)#
+obs=fobs(ff,8)#
+null2si=fnull2(ff,10000,8)#
+plot(obs-colMeans(null2si))
+pval(obs,nullfac)
+pval(obs,null)
+pval(obs,null2)
+ord=plotsig(null2si)
+lines(ord[9500,]-colMeans(nullfac),col="red")
+lines(ord[9500,]-colMeans(null2),col="red")
+ord=plotsig(nullfac)
+lines(ord[9500,]-colMeans(null2si ),col="red")
+ord=plotsig(null2)
+lines(ord[9500,]-colMeans(null2si),col="red")
+ord=plotsig(null2si)
+lines(ord[9500,]-colMeans(nullfac),col="red")
+lines(ord[9500,]-colMeans(null2),col="red")
+pval(obs,nullfac)
+pval(obs,null2si)
+pval(obs,null2)
+ord=plotsig(null2)
+lines(ord[9500,]-colMeans(null2),col="red")
+ord=plotsig(nullfac)
+lines(ord[9500,]-colMeans(nullfac),col="red")
+ord=plotsig(null2)
+lines(ord[9500,]-colMeans(null2),col="red")
+lines(ord[9500,]-colMeans(null2si),col="red")
+ord=plotsig(null2si)
+lines(ord[9500,]-colMeans(null2fac),col="red")
+lines(ord[9500,]-colMeans(nullfac),col="red")
+plot(obs-colMeans(null2si))
+pval(obs,null2si)
+ord=plotsig(null2si)
+lines(ord[9500,]-colMeans(null2si),col="red")
+null2si=fnull2(ff,10000,8)
+plot(obs-colMeans(null2si))
+pval(obs,null2si)
+null2si1000=fnull2(ff,1000,8)
+plot(obs-colMeans(null2si1000))
+pval(obs,null2si1000)
+ord=plotsig(null2si)
+lines(ord[9500,]-colMeans(null2si),col="red")
+library(bbmle)
+library(mvtnorm)
+colMeans(ff) #use these as starting values for mu
+normbi=function(x,mu1,mu2,s1,s2,cova){#
+    s1=exp(s1)#
+    s2=exp(s2)#
+    veros=-sum(dmvnorm(x, mean = c(mu1, mu2), sigma = matrix(c(s1,cova,cova,s2), ncol=2),log=TRUE))#
+    return(veros)#
+}#
+#
+params=mle2(minuslogl=normbi,start=list(mu1=0.1865048,mu2=0.4514217,s1=0.5,s2=0.5,cova=0),data=list(x=ff))
+params
+exp(-3.08619712)
+exp(-3.31955664)
+library(natto)#
+library(SimDesign)#
+#
+res=read.csv("~/Desktop/EN/Hellinger/hellingerfunnom.csv")#
+res2=res[,-1]#
+rownames(res2)=res[,1]#
+colnames(res2)=res[,1]#
+hell=as.dist(res2)#
+polarhell=polarord(hell)#
+#
+fobs=function(dat,cent){#
+    res=vector(length=cent)#
+    for(i in 1:cent){#
+        res[i]=-log(kmeans(dat,centers=i,iter.max=10000000,nstart=100)$tot.withinss)#
+    }#
+    return(res)#
+}#
+fnull=function(dat,iter,cent=8){#
+    nulls=matrix(nrow=iter,ncol=cent)#
+    resul=vector(length=dim(dat)[1])#
+    for(i in 1:iter){#
+        nulldat=cbind(runif(length(dat[,1]),min(dat[,1]),max(dat[,1])),runif(length(dat[,2]),min(dat[,2]),max(dat[,2])))#
+        nulls[i,]=fobs(nulldat,cent)#
+    }#
+    resul=nulls#
+    return(resul)#
+}#
+#
+fnull2=function(dat,iter,cent=8){#
+    nulls=matrix(nrow=iter,ncol=cent)#
+    resul=vector(length=dim(dat)[1])#
+    for(i in 1:iter){#
+        nulldat=rmvnorm(dim(dat)[1],mean=c(0.18650585,0.45142189),sigma=matrix(c(0.04567532,0.01237593,0.01237593,0.03616886),ncol=2))#
+        nulls[i,]=fobs(nulldat,cent)#
+    }#
+    resul=nulls#
+    return(resul)#
+}#
+#
+bb=polarhell$points[,1]#
+cc=bb-min(bb)#
+cc=cc/(max(cc))#
+dd=polarhell$points[,2]#
+ee=dd-min(dd)#
+ee=ee/(max(ee))#
+ff=cbind(cc,ee)#
+obs=fobs(ff,8)#
+null2si=fnull2(ff,10000,8)#
+plot(obs-colMeans(null2si))
+pval=function(obs,null){#
+    resul=1:length(obs)#
+    for(i in 1:length(obs)){#
+        resul[i]=length(which(null[,i]>obs[i]))/length(null[,i])#
+    }#
+    resul#
+}#
+#
+pval(obs,null2si)
+ord=plotsig(null2)#
+lines(ord[9500,]-colMeans(null2si),col="red")
+ord=plotsig(null2si)#
+lines(ord[9500,]-colMeans(null2),col="red")
+ord=plotsig(null2)#
+lines(ord[9500,]-colMeans(null2si),col="red")
+lines(ord[9500,]-colMeans(null2),col="red")
+ord=plotsig(null2)
+plot(obs-colMeans(null2si))
+ord=plotsig(null2)#
+lines(ord[9500,]-colMeans(null2),col="red")
+ord=plotsig(null2)#
+lines(ord[9500,]-colMeans(null2si),col="red")
+ord=plotsig(null2si)#
+lines(ord[9500,]-colMeans(null2),col="red")
+plot(obs-colMeans(null2si))
+pval(obs,null2si)
+plot(obs-colMeans(null2si))
+ord=plotsig(null2si)
+lines(ord[9500,]-colMeans(null2si),col="red")
+ktres=kmeans(ff,centers=4,iter.max=1000)
+ktres
+dat=read.csv("~/Desktop/EN/movimiento/movimiento.csv")#
+#
+attach(dat)#
+#
+plot(c(-100,-100),xlim=c(0,3),ylim=c(3,28))#
+#
+for(i in 1:31){#
+    lines(c(1,2),c(sin[i],con[i]),col="gray")#
+    points(1,sin[i],col=colsin[i])#
+    points(2,con[i],col=colcon[i])#
+#
+}
+plot(c(-100,-100),xlim=c(0,3),ylim=c(3,28))#
+#
+for(i in 1:31){#
+    lines(c(1,2),c(sin[i],con[i]),col="gray")#
+    points(1,sin[i],col=colsin[i])#
+    points(2,con[i],col=colcon[i])#
+#
+}
+0/10
+10/0
+log(Inf)
+library(natto)#
+library(SimDesign)#
+#
+res=read.csv("~/Desktop/EN/Hellinger/hellingerfunnom.csv")#
+res2=res[,-1]#
+rownames(res2)=res[,1]#
+colnames(res2)=res[,1]#
+hell=as.dist(res2)#
+polarhell=polarord(hell)#
+#
+fobs=function(dat,cent){#
+    res=vector(length=cent)#
+    for(i in 1:cent){#
+        res[i]=-log(kmeans(dat,centers=i,iter.max=10000000,nstart=100)$tot.withinss)#
+    }#
+    return(res)#
+}
+bb=polarhell$points[,1]#
+cc=bb-min(bb)#
+cc=cc/(max(cc))#
+dd=polarhell$points[,2]#
+ee=dd-min(dd)#
+ee=ee/(max(ee))#
+ff=cbind(cc,ee)#
+obs=fobs(ff,8)
+library(bbmle)
+library(mvtnorm)
+colMeans(ff) #use these as starting values for mu
+normbi=function(x,mu1,mu2,s1,s2,cova){#
+    s1=exp(s1)#
+    s2=exp(s2)#
+    veros=-sum(dmvnorm(x, mean = c(mu1, mu2), sigma = matrix(c(s1,cova,cova,s2), ncol=2),log=TRUE))#
+    return(veros)#
+}
+params=mle2(minuslogl=normbi,start=list(mu1=0.1865048,mu2=0.4514217,s1=0.5,s2=0.5,cova=0),data=list(x=ff))
+params
+exp(-3.08619712)
+exp(-3.31955664)
+fnull2=function(dat,iter,cent=8){#
+    nulls=matrix(nrow=iter,ncol=cent)#
+    resul=vector(length=dim(dat)[1])#
+    for(i in 1:iter){#
+        nulldat=rmvnorm(dim(dat)[1],mean=c(0.18650585,0.45142189),sigma=matrix(c(0.04567532,0.01237593,0.01237593,0.03616886),ncol=2))#
+        nulls[i,]=fobs(nulldat,cent)#
+    }#
+    resul=nulls#
+    return(resul)#
+}
+null2si=fnull2(ff,10000,8)
+plot(obs-colMeans(null2si))
+pval=function(obs,null){#
+    resul=1:length(obs)#
+    for(i in 1:length(obs)){#
+        resul[i]=length(which(null[,i]>obs[i]))/length(null[,i])#
+    }#
+    resul#
+}
+pval(obs,null2si)
+plotsig=function(null2){#
+    resul=matrix(nrow=nrow(null2),ncol=ncol(null2))#
+    for(i in 1:ncol(null2)){#
+        resul[,i]=sort(null2[,i])#
+    }#
+    return(resul)#
+}
+ord=plotsig(null2si)
+lines(ord[9500,]-colMeans(null2si),col="red")
+ktres=kmeans(ff,centers=4,iter.max=1000)#
+ktres
+dat=read.csv("~/Desktop/EN/movimiento/movimiento.csv")
+attach(dat)
+plot(c(-100,-100),xlim=c(0.75,2.25),ylim=c(3,28),xaxt='n',ylab="Soil depth (cm)",xlab="")
+axis(1, seq(0,4,1))
+for(i in 1:31){#
+    lines(c(1,2),c(sin[i],con[i]),col="gray")#
+    points(1,sin[i],col=colsin[i],cex=0.6)#
+    points(2,con[i],col=colcon[i],cex=0.6)#
+#
+}
+dat=read.csv("~/Desktop/EN/movimiento/movimientocol.csv")
+attach(dat)
+dat=read.csv("~/Desktop/EN/movimiento/movimientocol.csv")
+attach(dat)
+plot(c(-100,-100),xlim=c(0.75,2.25),ylim=c(3,28),xaxt='n',ylab="Soil depth (cm)",xlab="")
+axis(1, seq(0,4,1))
+for(i in 1:31){#
+    lines(c(1,2),c(sin[i],con[i]),col="gray")#
+    points(1,sin[i],col=colsin[i],cex=0.6)#
+    points(2,con[i],col=colcon[i],cex=0.6)#
+#
+}
+datt
+dat
+colcon[1]
+dat=read.csv("~/Desktop/EN/movimiento/movimientocol.csv")
+attach(dat)
+colcon[1]
+plot(c(-100,-100),xlim=c(0.75,2.25),ylim=c(3,28),xaxt='n',ylab="Soil depth (cm)",xlab="")#
+axis(1, seq(0,4,1))#
+#
+for(i in 1:31){#
+    lines(c(1,2),c(sin[i],con[i]),col="gray")#
+    points(1,sin[i],col=colsin[i],cex=0.6)#
+    points(2,con[i],col=colcon[i],cex=0.6)#
+#
+}
+setwd('/home/invitado/Escritorio/Ale/github repo/clumpingmecs/simulations' )#
+#
+#read data#
+DD=read.csv("DDs.csv") #mortality parameter#
+BBs1=read.csv("BBs1.csv") #parameter a#
+BBs2=read.csv("BBs2.csv") #parameter b#
+BBs3=read.csv("BBs3.csv") #parametro c#
+alfas1=read.csv("alfas1.csv") #parameter g #
+alfas2=read.csv("alfas2.csv") #parameter h#
+betas=read.csv("betas.csv")#facilitation parameter#
+#
+#convert all data to matrices#
+BB1=as.matrix(BBs1[,2:ncol(BBs1)])#
+rownames(BB1)=BBs1[,1]#
+BB2=as.matrix(BBs2[,2:ncol(BBs2)])#
+rownames(BB2)=BBs2[,1]#
+BB3=as.matrix(BBs3[,2:ncol(BBs3)])#
+rownames(BB3)=BBs3[,1]#
+alphas1=as.matrix(alfas1[,2:ncol(alfas1)])#
+rownames(alphas1)=alfas1[,1]#
+alphas2=as.matrix(alfas2[,2:ncol(alfas2)])#
+rownames(alphas2)=alfas2[,1]#
+bbetas=as.matrix(betas[,2:ncol(betas)])#
+rownames(bbetas)=betas[,1]#
+#
+#We take into account only the birth rate parameters of the last seven years#
+BB1=BB1[,8:14]#
+BB2=BB2[,8:14]#
+BB3=BB3[,8:14]#
+#Detransform parameters#
+BB2=1/(1+exp(-BB2))-.5#
+BB3=-1/(1+exp(-BB3))*5/1000#
+-999->alphas1[which(is.na(alphas1[,])=="TRUE")]#
+0->alphas2[which(is.na(alphas2[,])=="TRUE")]#
+bbetas=1/(1+exp(-bbetas))#
+0->bbetas[which(is.na(bbetas[,])=="TRUE")]#
+#
+#To obtain total abundance of the species  for which we did not calculate pairwise interactions#
+spnum=ncol(alphas1) #to obtain the number of species in our study#
+tx0=matrix(ncol=ncol(alphas1),nrow=nrow(alphas1))#
+0->tx0[which(is.na(alphas1[,])=="FALSE")]#
+1->tx0[which(is.na(alphas1[,])=="TRUE")]#
+tx0=tx0[,-37]#
+#
+#separate the parameters of the species for which we have abundance data#
+alpabu1=alphas1[1:33,1:37]#
+alpabu2=alphas2[1:33,1:37]#
+betabu=bbetas[1:33,1:37]#
+DDabu=DD[1:33,]#
+BB1abu=BB1[1:33,]#
+BB2abu=BB2[1:33,]#
+BB3abu=BB3[1:33,]#
+#separate the parameters of the species for which we have presence/absence data#
+alppa1=alphas1[34:36,1:37]#
+alppa2=alphas2[34:36,1:37]#
+betpa=bbetas[34:36,1:37]#
+DDpa=DD[34:36,]#
+BB1pa=BB1[34:36,]#
+BB2pa=BB2[34:36,]#
+BB3pa=BB3[34:36,]#
+#
+#Function for species with abundance data to simulate the abundance of species in the next year#
+lam=function(DD,BB1,BB2,BB3,alphas1,alphas2,bbetas,tx,txothers,year,depth){#
+    surv=(1-DD[,2])*tx[1:33]#
+    BB1=BB1[,year]#
+    BB2=BB2[,year]#
+    BB3=BB3[,year]#
+    BB=exp(BB1+BB2*depth+BB3*depth^2)#
+    alphas=exp(alphas1+alphas2*depth)#
+    alphaspre=alphas[,1:36]%*%tx #
+    alphasothers=alphas[,37]*txothers#
+    alphasum=alphaspre+alphasothers#
+    txmas=log(tx+1)#
+    txmasother=log(txothers+1)#
+    betaspre=bbetas[,1:36]%*%txmas#
+    betasothers=bbetas[,37]*txmasother#
+    betassum=betaspre+betasothers#
+    fac=exp(betassum)#
+    new=BB*tx[1:33]/(1+alphasum)*fac#
+    t2=surv+new#
+    return(t2)#
+}#
+#Function for species with presence absence daata to simulate if the species is present of absent in the next year#
+lampa=function(DD,BB1,BB2,BB3,alphas1,alphas2,bbetas,tx,txothers,year,depth){#
+    surv=(1-DD[,2])*tx[34:36]#
+    BB1=BB1[,year]#
+    BB2=BB2[,year]#
+    BB3=BB3[,year]#
+    BB=exp(BB1+BB2*depth+BB3*depth^2)#
+    alphas=exp(alphas1+alphas2*depth) #
+    alphaspre=alphas[,1:36]%*%tx#
+    alphasothers=alphas[,37]*txothers#
+    alphasum=alphaspre+alphasothers#
+    txmas=log(tx+1)#
+    txmasother=log(txothers+1)#
+    betaspre=bbetas[,1:36]%*%txmas#
+    betasothers=bbetas[,37]*txmasother#
+    betassum=betaspre+betasothers#
+    fac=exp(betassum)#
+    new=BB*tx[34:36]/(1+alphasum)*fac#
+    t2=1-(1-surv)*exp(-new)#
+    return(t2)#
+}#
+#To obtain initial abuncances of the species#
+spnum=ncol(alphas1)#
+tx=matrix(ncol=1,nrow=nrow(alphas1))#
+tx[1:33,1]=runif(33, min = .001, max = 1)#
+tx[34:36,1]=runif(3, min = .001, max = 1)#
+tx[35,1]=0 #eliminates species 35#
+#
+#Function that integrates both species with abuncance data and species with presence absence data into the same simulation#
+lamx=function(DDabu,alpabu1,alpabu2,betabu,BB1abu,BB2abu,BB3abu,alppa1,alppa2,betapa,DDpa,BB1pa,BB2pa,BB3pa,tx,tx0,year,depth){#
+    txothers=as.vector(tx0%*%tx)#
+    t2abu=lam(DDabu,BB1abu,BB2abu,BB3abu,alpabu1,alpabu2,betabu,tx,txothers[1:33],year,depth)#
+    t2pa=lampa(DDpa,BB1pa,BB2pa,BB3pa,alppa1,alppa2,betpa,tx,txothers[34:36],year,depth)#
+    t2=matrix(nrow=36,ncol=1)#
+    t2[1:33,]=t2abu[1:33,]#
+    t2[34:36,]=t2pa#
+    rownames(t2)=rownames(DD)#
+    return(t2)#
+}#
+#
+#Function that runs the simulation for a species number of time steps (iter) but ilimanated a specific number of runs (burn)#
+simu=function(DDabu,alpabu1,alpabu2,betabu,BB1abu,BB2abu,BB3abu,alppa1,alppa2,betapa,DDpa,BB1pa,BB2pa,BB3pa,tx,tx0,depth,iter=1000,burn=100){#
+    for(i in 1:burn) {#
+        tx=lamx(DDabu,alpabu1,alpabu2,betabu,BB1abu,BB2abu,BB3abu,alppa1,alppa2,betapa,DDpa,BB1pa,BB2pa,BB3pa,tx,tx0,floor(runif(1)*7)+1,depth)#
+    }#
+    sal=matrix(nrow=36,ncol=iter)#
+    for(i in 1:iter) {#
+        sal[,i]=tx#
+        tx=lamx(DDabu,alpabu1,alpabu2,betabu,BB1abu,BB2abu,BB3abu,alppa1,alppa2,betapa,DDpa,BB1pa,BB2pa,BB3pa,tx,tx0,floor(runif(1)*7)+1,depth)#
+    }#
+        rownames(sal)=rownames(BB1)#
+        return(sal)#
+}#
+#
+#Runs the simulation for each soil depth between 3 and 28 cm every 0.1 cm#
+profs=function(DDabu,alpabu1,alpabu2,betabu,BB1abu,BB2abu,BB3abu,alppa1,alppa2,betapa,DDpa,BB1pa,BB2pa,BB3pa,tx,tx0,iter){#
+    prof=seq(3,28,0.1)#
+    ncat=length(seq(3,28,0.1))#
+    sal=matrix(nrow=36,ncol=ncat)#
+    for(i in 1:ncat){#
+        sal[,i]=rowMeans(simu(DDabu,alpabu1,alpabu2,betabu,BB1abu,BB2abu,BB3abu,alppa1,alppa2,betapa,DDpa,BB1pa,BB2pa,BB3pa,tx,tx0,prof[i],iter=iter))#
+    }#
+    return(sal)#
+}#
+#
+prue=profs(DDabu,alpabu1,alpabu2,betabu,BB1abu,BB2abu,BB3abu,alppa1,alppa2,betapa,DDpa,BB1pa,BB2pa,BB3pa,tx,tx0,100000)
+setwd('/home/invitado/Escritorio/Ale/github repo/clumpingmecs/simulations' )
+#read data#
+DD=read.csv("DDs.csv") #mortality parameter#
+BBs1=read.csv("BBs1.csv") #parameter a#
+BBs2=read.csv("BBs2.csv") #parameter b#
+BBs3=read.csv("BBs3.csv") #parametro c#
+alfas1=read.csv("alfas1.csv") #parameter g #
+alfas2=read.csv("alfas2.csv") #parameter h#
+betas=read.csv("betas.csv")#facilitation parameter
+setwd('/home/invitado/Escritorio/Ale/github repo/clumpingmecs/simulations' )
+setwd("~/Desktop/Repo/clumpingmecs/simulations")#
+#
+#read data#
+DD=read.csv("DDs.csv") #mortality parameter#
+BBs1=read.csv("BBs1.csv") #parameter a#
+BBs2=read.csv("BBs2.csv") #parameter b#
+BBs3=read.csv("BBs3.csv") #parametro c#
+alfas1=read.csv("alfas1.csv") #parameter g #
+alfas2=read.csv("alfas2.csv") #parameter h#
+betas=read.csv("betas.csv")#facilitation parameter
+#convert all data to matrices#
+BB1=as.matrix(BBs1[,2:ncol(BBs1)])#
+rownames(BB1)=BBs1[,1]#
+BB2=as.matrix(BBs2[,2:ncol(BBs2)])#
+rownames(BB2)=BBs2[,1]#
+BB3=as.matrix(BBs3[,2:ncol(BBs3)])#
+rownames(BB3)=BBs3[,1]#
+alphas1=as.matrix(alfas1[,2:ncol(alfas1)])#
+rownames(alphas1)=alfas1[,1]#
+alphas2=as.matrix(alfas2[,2:ncol(alfas2)])#
+rownames(alphas2)=alfas2[,1]#
+bbetas=as.matrix(betas[,2:ncol(betas)])#
+rownames(bbetas)=betas[,1]#
+#
+#We take into account only the birth rate parameters of the last seven years#
+BB1=BB1[,8:14]#
+BB2=BB2[,8:14]#
+BB3=BB3[,8:14]#
+#Detransform parameters#
+BB2=1/(1+exp(-BB2))-.5#
+BB3=-1/(1+exp(-BB3))*5/1000#
+-999->alphas1[which(is.na(alphas1[,])=="TRUE")]#
+0->alphas2[which(is.na(alphas2[,])=="TRUE")]#
+bbetas=1/(1+exp(-bbetas))#
+0->bbetas[which(is.na(bbetas[,])=="TRUE")]#
+#
+#To obtain total abundance of the species  for which we did not calculate pairwise interactions#
+spnum=ncol(alphas1) #to obtain the number of species in our study#
+tx0=matrix(ncol=ncol(alphas1),nrow=nrow(alphas1))#
+0->tx0[which(is.na(alphas1[,])=="FALSE")]#
+1->tx0[which(is.na(alphas1[,])=="TRUE")]#
+tx0=tx0[,-37]#
+#
+#separate the parameters of the species for which we have abundance data#
+alpabu1=alphas1[1:33,1:37]#
+alpabu2=alphas2[1:33,1:37]#
+betabu=bbetas[1:33,1:37]#
+DDabu=DD[1:33,]#
+BB1abu=BB1[1:33,]#
+BB2abu=BB2[1:33,]#
+BB3abu=BB3[1:33,]#
+#separate the parameters of the species for which we have presence/absence data#
+alppa1=alphas1[34:36,1:37]#
+alppa2=alphas2[34:36,1:37]#
+betpa=bbetas[34:36,1:37]#
+DDpa=DD[34:36,]#
+BB1pa=BB1[34:36,]#
+BB2pa=BB2[34:36,]#
+BB3pa=BB3[34:36,]#
+#
+#Function for species with abundance data to simulate the abundance of species in the next year#
+lam=function(DD,BB1,BB2,BB3,alphas1,alphas2,bbetas,tx,txothers,year,depth){#
+    surv=(1-DD[,2])*tx[1:33]#
+    BB1=BB1[,year]#
+    BB2=BB2[,year]#
+    BB3=BB3[,year]#
+    BB=exp(BB1+BB2*depth+BB3*depth^2)#
+    alphas=exp(alphas1+alphas2*depth)#
+    alphaspre=alphas[,1:36]%*%tx #
+    alphasothers=alphas[,37]*txothers#
+    alphasum=alphaspre+alphasothers#
+    txmas=log(tx+1)#
+    txmasother=log(txothers+1)#
+    betaspre=bbetas[,1:36]%*%txmas#
+    betasothers=bbetas[,37]*txmasother#
+    betassum=betaspre+betasothers#
+    fac=exp(betassum)#
+    new=BB*tx[1:33]/(1+alphasum)*fac#
+    t2=surv+new#
+    return(t2)#
+}#
+#Function for species with presence absence daata to simulate if the species is present of absent in the next year#
+lampa=function(DD,BB1,BB2,BB3,alphas1,alphas2,bbetas,tx,txothers,year,depth){#
+    surv=(1-DD[,2])*tx[34:36]#
+    BB1=BB1[,year]#
+    BB2=BB2[,year]#
+    BB3=BB3[,year]#
+    BB=exp(BB1+BB2*depth+BB3*depth^2)#
+    alphas=exp(alphas1+alphas2*depth) #
+    alphaspre=alphas[,1:36]%*%tx#
+    alphasothers=alphas[,37]*txothers#
+    alphasum=alphaspre+alphasothers#
+    txmas=log(tx+1)#
+    txmasother=log(txothers+1)#
+    betaspre=bbetas[,1:36]%*%txmas#
+    betasothers=bbetas[,37]*txmasother#
+    betassum=betaspre+betasothers#
+    fac=exp(betassum)#
+    new=BB*tx[34:36]/(1+alphasum)*fac#
+    t2=1-(1-surv)*exp(-new)#
+    return(t2)#
+}#
+#To obtain initial abuncances of the species#
+spnum=ncol(alphas1)#
+tx=matrix(ncol=1,nrow=nrow(alphas1))#
+tx[1:33,1]=runif(33, min = .001, max = 1)#
+tx[34:36,1]=runif(3, min = .001, max = 1)#
+tx[35,1]=0 #eliminates species 35#
+#
+#Function that integrates both species with abuncance data and species with presence absence data into the same simulation#
+lamx=function(DDabu,alpabu1,alpabu2,betabu,BB1abu,BB2abu,BB3abu,alppa1,alppa2,betapa,DDpa,BB1pa,BB2pa,BB3pa,tx,tx0,year,depth){#
+    txothers=as.vector(tx0%*%tx)#
+    t2abu=lam(DDabu,BB1abu,BB2abu,BB3abu,alpabu1,alpabu2,betabu,tx,txothers[1:33],year,depth)#
+    t2pa=lampa(DDpa,BB1pa,BB2pa,BB3pa,alppa1,alppa2,betpa,tx,txothers[34:36],year,depth)#
+    t2=matrix(nrow=36,ncol=1)#
+    t2[1:33,]=t2abu[1:33,]#
+    t2[34:36,]=t2pa#
+    rownames(t2)=rownames(DD)#
+    return(t2)#
+}#
+#
+#Function that runs the simulation for a species number of time steps (iter) but ilimanated a specific number of runs (burn)#
+simu=function(DDabu,alpabu1,alpabu2,betabu,BB1abu,BB2abu,BB3abu,alppa1,alppa2,betapa,DDpa,BB1pa,BB2pa,BB3pa,tx,tx0,depth,iter=1000,burn=100){#
+    for(i in 1:burn) {#
+        tx=lamx(DDabu,alpabu1,alpabu2,betabu,BB1abu,BB2abu,BB3abu,alppa1,alppa2,betapa,DDpa,BB1pa,BB2pa,BB3pa,tx,tx0,floor(runif(1)*7)+1,depth)#
+    }#
+    sal=matrix(nrow=36,ncol=iter)#
+    for(i in 1:iter) {#
+        sal[,i]=tx#
+        tx=lamx(DDabu,alpabu1,alpabu2,betabu,BB1abu,BB2abu,BB3abu,alppa1,alppa2,betapa,DDpa,BB1pa,BB2pa,BB3pa,tx,tx0,floor(runif(1)*7)+1,depth)#
+    }#
+        rownames(sal)=rownames(BB1)#
+        return(sal)#
+}#
+#
+#Runs the simulation for each soil depth between 3 and 28 cm every 0.1 cm#
+profs=function(DDabu,alpabu1,alpabu2,betabu,BB1abu,BB2abu,BB3abu,alppa1,alppa2,betapa,DDpa,BB1pa,BB2pa,BB3pa,tx,tx0,iter){#
+    prof=seq(3,28,0.1)#
+    ncat=length(seq(3,28,0.1))#
+    sal=matrix(nrow=36,ncol=ncat)#
+    for(i in 1:ncat){#
+        sal[,i]=rowMeans(simu(DDabu,alpabu1,alpabu2,betabu,BB1abu,BB2abu,BB3abu,alppa1,alppa2,betapa,DDpa,BB1pa,BB2pa,BB3pa,tx,tx0,prof[i],iter=iter))#
+    }#
+    return(sal)#
+}#
+#
+prue=profs(DDabu,alpabu1,alpabu2,betabu,BB1abu,BB2abu,BB3abu,alppa1,alppa2,betapa,DDpa,BB1pa,BB2pa,BB3pa,tx,tx0,100000)
+surv=(1-DD[,2])*tx[1:33]
+tx
+DD
+1-DD[,2]
+tx[1:33]
+(1-DD[,2])
+tx[1:33]
+(1-DD[,2])*tx[1:33]
+setwd('/home/invitado/Escritorio/Ale/github repo/clumpingmecs/simulations' )
+wd
+wd()
+setwd("~/Desktop/Repo/clumpingmecs/simulations")
+DD=read.csv("DDs.csv") #mortality parameter#
+BBs1=read.csv("BBs1.csv") #parameter a#
+BBs2=read.csv("BBs2.csv") #parameter b#
+BBs3=read.csv("BBs3.csv") #parametro c#
+alfas1=read.csv("alfas1.csv") #parameter g #
+alfas2=read.csv("alfas2.csv") #parameter h#
+betas=read.csv("betas.csv")#facilitation parameter
+#convert all data to matrices#
+BB1=as.matrix(BBs1[,2:ncol(BBs1)])#
+rownames(BB1)=BBs1[,1]#
+BB2=as.matrix(BBs2[,2:ncol(BBs2)])#
+rownames(BB2)=BBs2[,1]#
+BB3=as.matrix(BBs3[,2:ncol(BBs3)])#
+rownames(BB3)=BBs3[,1]#
+alphas1=as.matrix(alfas1[,2:ncol(alfas1)])#
+rownames(alphas1)=alfas1[,1]#
+alphas2=as.matrix(alfas2[,2:ncol(alfas2)])#
+rownames(alphas2)=alfas2[,1]#
+bbetas=as.matrix(betas[,2:ncol(betas)])#
+rownames(bbetas)=betas[,1]#
+#
+#We take into account only the birth rate parameters of the last seven years#
+BB1=BB1[,8:14]#
+BB2=BB2[,8:14]#
+BB3=BB3[,8:14]#
+#Detransform parameters#
+BB2=1/(1+exp(-BB2))-.5#
+BB3=-1/(1+exp(-BB3))*5/1000#
+-999->alphas1[which(is.na(alphas1[,])=="TRUE")]#
+0->alphas2[which(is.na(alphas2[,])=="TRUE")]#
+bbetas=1/(1+exp(-bbetas))#
+0->bbetas[which(is.na(bbetas[,])=="TRUE")]#
+#
+#To obtain total abundance of the species  for which we did not calculate pairwise interactions#
+spnum=ncol(alphas1) #to obtain the number of species in our study#
+tx0=matrix(ncol=ncol(alphas1),nrow=nrow(alphas1))#
+0->tx0[which(is.na(alphas1[,])=="FALSE")]#
+1->tx0[which(is.na(alphas1[,])=="TRUE")]#
+tx0=tx0[,-37]#
+#
+#separate the parameters of the species for which we have abundance data#
+alpabu1=alphas1[1:33,1:37]#
+alpabu2=alphas2[1:33,1:37]#
+betabu=bbetas[1:33,1:37]#
+DDabu=DD[1:33,]#
+BB1abu=BB1[1:33,]#
+BB2abu=BB2[1:33,]#
+BB3abu=BB3[1:33,]#
+#separate the parameters of the species for which we have presence/absence data#
+alppa1=alphas1[34:36,1:37]#
+alppa2=alphas2[34:36,1:37]#
+betpa=bbetas[34:36,1:37]#
+DDpa=DD[34:36,]#
+BB1pa=BB1[34:36,]#
+BB2pa=BB2[34:36,]#
+BB3pa=BB3[34:36,]#
+#
+#Function for species with abundance data to simulate the abundance of species in the next year#
+lam=function(DD,BB1,BB2,BB3,alphas1,alphas2,bbetas,tx,txothers,year,depth){#
+    surv=(1-DD[,2])*tx[1:33]#
+    BB1=BB1[,year]#
+    BB2=BB2[,year]#
+    BB3=BB3[,year]#
+    BB=exp(BB1+BB2*depth+BB3*depth^2)#
+    alphas=exp(alphas1+alphas2*depth)#
+    alphaspre=alphas[,1:36]%*%tx #
+    alphasothers=alphas[,37]*txothers#
+    alphasum=alphaspre+alphasothers#
+    txmas=log(tx+1)#
+    txmasother=log(txothers+1)#
+    betaspre=bbetas[,1:36]%*%txmas#
+    betasothers=bbetas[,37]*txmasother#
+    betassum=betaspre+betasothers#
+    fac=exp(betassum)#
+    new=BB*tx[1:33]/(1+alphasum)*fac#
+    t2=surv+new#
+    return(t2)#
+}#
+#Function for species with presence absence daata to simulate if the species is present of absent in the next year#
+lampa=function(DD,BB1,BB2,BB3,alphas1,alphas2,bbetas,tx,txothers,year,depth){#
+    surv=(1-DD[,2])*tx[34:36]#
+    BB1=BB1[,year]#
+    BB2=BB2[,year]#
+    BB3=BB3[,year]#
+    BB=exp(BB1+BB2*depth+BB3*depth^2)#
+    alphas=exp(alphas1+alphas2*depth) #
+    alphaspre=alphas[,1:36]%*%tx#
+    alphasothers=alphas[,37]*txothers#
+    alphasum=alphaspre+alphasothers#
+    txmas=log(tx+1)#
+    txmasother=log(txothers+1)#
+    betaspre=bbetas[,1:36]%*%txmas#
+    betasothers=bbetas[,37]*txmasother#
+    betassum=betaspre+betasothers#
+    fac=exp(betassum)#
+    new=BB*tx[34:36]/(1+alphasum)*fac#
+    t2=1-(1-surv)*exp(-new)#
+    return(t2)#
+}#
+#To obtain initial abuncances of the species#
+spnum=ncol(alphas1)#
+tx=matrix(ncol=1,nrow=nrow(alphas1))#
+tx[1:33,1]=runif(33, min = .001, max = 1)#
+tx[34:36,1]=runif(3, min = .001, max = 1)#
+tx[35,1]=0 #eliminates species 35#
+#
+#Function that integrates both species with abuncance data and species with presence absence data into the same simulation#
+lamx=function(DDabu,alpabu1,alpabu2,betabu,BB1abu,BB2abu,BB3abu,alppa1,alppa2,betapa,DDpa,BB1pa,BB2pa,BB3pa,tx,tx0,year,depth){#
+    txothers=as.vector(tx0%*%tx)#
+    t2abu=lam(DDabu,BB1abu,BB2abu,BB3abu,alpabu1,alpabu2,betabu,tx,txothers[1:33],year,depth)#
+    t2pa=lampa(DDpa,BB1pa,BB2pa,BB3pa,alppa1,alppa2,betpa,tx,txothers[34:36],year,depth)#
+    t2=matrix(nrow=36,ncol=1)#
+    t2[1:33,]=t2abu[1:33,]#
+    t2[34:36,]=t2pa#
+    rownames(t2)=rownames(DD)#
+    return(t2)#
+}#
+#
+#Function that runs the simulation for a species number of time steps (iter) but ilimanated a specific number of runs (burn)#
+simu=function(DDabu,alpabu1,alpabu2,betabu,BB1abu,BB2abu,BB3abu,alppa1,alppa2,betapa,DDpa,BB1pa,BB2pa,BB3pa,tx,tx0,depth,iter=1000,burn=100){#
+    for(i in 1:burn) {#
+        tx=lamx(DDabu,alpabu1,alpabu2,betabu,BB1abu,BB2abu,BB3abu,alppa1,alppa2,betapa,DDpa,BB1pa,BB2pa,BB3pa,tx,tx0,floor(runif(1)*7)+1,depth)#
+    }#
+    sal=matrix(nrow=36,ncol=iter)#
+    for(i in 1:iter) {#
+        sal[,i]=tx#
+        tx=lamx(DDabu,alpabu1,alpabu2,betabu,BB1abu,BB2abu,BB3abu,alppa1,alppa2,betapa,DDpa,BB1pa,BB2pa,BB3pa,tx,tx0,floor(runif(1)*7)+1,depth)#
+    }#
+        rownames(sal)=rownames(BB1)#
+        return(sal)#
+}#
+#
+#Runs the simulation for each soil depth between 3 and 28 cm every 0.1 cm#
+profs=function(DDabu,alpabu1,alpabu2,betabu,BB1abu,BB2abu,BB3abu,alppa1,alppa2,betapa,DDpa,BB1pa,BB2pa,BB3pa,tx,tx0,iter){#
+    prof=seq(3,28,0.1)#
+    ncat=length(seq(3,28,0.1))#
+    sal=matrix(nrow=36,ncol=ncat)#
+    for(i in 1:ncat){#
+        sal[,i]=rowMeans(simu(DDabu,alpabu1,alpabu2,betabu,BB1abu,BB2abu,BB3abu,alppa1,alppa2,betapa,DDpa,BB1pa,BB2pa,BB3pa,tx,tx0,prof[i],iter=iter))#
+    }#
+    return(sal)#
+}#
+#
+prue=profs(DDabu,alpabu1,alpabu2,betabu,BB1abu,BB2abu,BB3abu,alppa1,alppa2,betapa,DDpa,BB1pa,BB2pa,BB3pa,tx,tx0,100000)
+debug(prue)
+debug(profs)
+profs(DDabu,alpabu1,alpabu2,betabu,BB1abu,BB2abu,BB3abu,alppa1,alppa2,betapa,DDpa,BB1pa,BB2pa,BB3pa,tx,tx0,100)
+dim(alphas[, 1:36])
