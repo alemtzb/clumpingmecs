@@ -1,13 +1,13 @@
-setwd('/home/invitado/Escritorio/Ale/github repo/clumpingmecs/simulations' )
+#Alejandra Martínez Blancas & Carlos Martorell 03/05/22 alemtzb@ciencias.unam.mx
 
 #read data
-DD=read.csv("DDs.csv") #mortality parameter
-BBs1=read.csv("BBs1.csv") #parameter a
-BBs2=read.csv("BBs2.csv") #parameter b
-BBs3=read.csv("BBs3.csv") #parametro c
-alfas1=read.csv("alfas1.csv") #parameter g 
-alfas2=read.csv("alfas2.csv") #parameter h
-betas=read.csv("betas.csv")#facilitation parameter which will later be ignored in the simulation
+DD=read.csv("clumpingmecs/simulations/DDs.csv") #mortality parameter
+BBs1=read.csv("clumpingmecs/simulations/BBs1.csv") #parameter a
+BBs2=read.csv("clumpingmecs/simulations/BBs2.csv") #parameter b
+BBs3=read.csv("clumpingmecs/simulations/BBs3.csv") #parametro c
+alfas1=read.csv("clumpingmecs/simulations/alfas1.csv") #parameter g 
+alfas2=read.csv("clumpingmecs/simulations/alfas2.csv") #parameter h
+betas=read.csv("clumpingmecs/simulations/betas.csv")#facilitation parameter
 
 #convert all data to matrices
 BB1=as.matrix(BBs1[,2:ncol(BBs1)])
@@ -110,7 +110,7 @@ spnum=ncol(alphas1)
 tx=matrix(ncol=1,nrow=nrow(alphas1))
 tx[1:33,1]=runif(33, min = .001, max = 1)
 tx[34:36,1]=runif(3, min = .001, max = 1)
-tx[35,1]=0 #eliminates species 35
+tx[35,1]=0 #eliminates species 35 which we weren't able to model correctly
 
 #Function that integrates both species with abuncance data and species with presence absence data into the same simulation
 lamx=function(DDabu,alpabu1,alpabu2,betabu,BB1abu,BB2abu,BB3abu,alppa1,alppa2,betapa,DDpa,BB1pa,BB2pa,BB3pa,tx,tx0,year,depth){
