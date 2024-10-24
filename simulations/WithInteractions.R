@@ -1,13 +1,13 @@
 #Alejandra Martínez Blancas & Carlos Martorell 03/05/22 alemtzb@ciencias.unam.mx
 
 #read data
-DD=read.csv("clumpingmecs/simulations/DDs.csv") #mortality parameter
-BBs1=read.csv("clumpingmecs/simulations/BBs1.csv") #parameter a
-BBs2=read.csv("clumpingmecs/simulations/BBs2.csv") #parameter b
-BBs3=read.csv("clumpingmecs/simulations/BBs3.csv") #parametro c
-alfas1=read.csv("clumpingmecs/simulations/alfas1.csv") #parameter g 
-alfas2=read.csv("clumpingmecs/simulations/alfas2.csv") #parameter h
-betas=read.csv("clumpingmecs/simulations/betas.csv")#facilitation parameter
+DD=read.csv("../clumpingmecs/simulations/DDs.csv") #mortality parameter
+BBs1=read.csv("../clumpingmecs/simulations/BBs1.csv") #parameter a
+BBs2=read.csv("../clumpingmecs/simulations/BBs2.csv") #parameter b
+BBs3=read.csv("../clumpingmecs/simulations/BBs3.csv") #parametro c
+alfas1=read.csv("../clumpingmecs/simulations/alfas1.csv") #parameter g 
+alfas2=read.csv("../clumpingmecs/simulations/alfas2.csv") #parameter h
+betas=read.csv("../clumpingmecs/simulations/betas.csv")#facilitation parameter
 
 #convert all data to matrices
 BB1=as.matrix(BBs1[,2:ncol(BBs1)])
